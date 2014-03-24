@@ -1,0 +1,23 @@
+{
+    "name": "fduch/composer-netrc-auth-plugin",
+    "license": "MIT",
+    "type": "composer-plugin",
+    "keywords": ["composer", "authorization"],
+    "authors": [
+        {
+            "name": "Alex Medvedev",
+            "email": "alex.medwedew@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"Fduch\\Composer\\Plugin\\": "src/"}
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "composer-plugin-api": "1.0.0",
+        "fduch/netrc": "<2.0"
+    },
+    "extra": {
+        "class": "Fduch\\Composer\\Plugin\\NetrcAuthPlugin"
+    }
+}
