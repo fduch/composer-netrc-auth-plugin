@@ -18,6 +18,9 @@
         "fduch/netrc": "<2.0"
     },
     "extra": {
-        "class": "Fduch\\Composer\\Plugin\\NetrcAuthPlugin"
+        "class": "Fduch\\Composer\\Plugin\\NetrcAuthPlugin",
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
     }
 }
