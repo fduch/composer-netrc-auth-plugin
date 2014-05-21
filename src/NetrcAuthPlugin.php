@@ -1,6 +1,5 @@
 <?php
 /**
-/*
  * This file is part of the composer-netrc-auth-plugin package.
  *
  * (c) Alex Medvedev <alex.medwedew@gmail.com>
@@ -61,16 +60,40 @@ class NetrcAuthPlugin implements PluginInterface, EventSubscriberInterface
      */
     public function onPreFileDownload(PreFileDownloadEvent $event)
     {
+        // parse host
         $host = parse_url($event->getProcessedUrl(), PHP_URL_HOST);
-        if ($host && !$this->io->hasAuthentication($host)) {
-            try {
-                $netrcParsed = Netrc::parse();
-                if (isset($netrcParsed[$host]['login']) && isset($netrcParsed[$host]['password'])) {
-                    $this->io->setAuthentication($host, $netrcParsed[$host]['login'], $netrcParsed[$host]['password']);
-                }
-            } catch (ParseException $ex) {
-                // we cannot authorize current user via netrc
+        if (!$host) {
+            if ($this->io->isVerbose()) {
+                $this->io->write(sprintf("<warning>Cannot authenticate user via netrc credentials. Unable to fetch ".
+                    "host from processing url: </warning><comment>%s</comment>", $event->getProcessedUrl()));
             }
+            return;
+        }
+
+        // check that user is already authenticated
+        if ($this->io->hasAuthentication($host)) {
+            if ($this->io->isVerbose()) {
+                $this->io->write(sprintf("    Skipping netrc authentication. User is already ".
+                    "authenticated on <comment>%s</comment>", $host));
+            }
+            return;
+        }
+
+        // trying to authenticate user with netrc credentials
+        try {
+            $netrcParsed = Netrc::parse();
+            if (isset($netrcParsed[$host]['login']) && isset($netrcParsed[$host]['password'])) {
+                $this->io->setAuthentication($host, $netrcParsed[$host]['login'], $netrcParsed[$host]['password']);
+                $this->io->write("    <info>User successfully authenticated using netrc credentials</info>");
+            } else {
+                if ($this->io->isVerbose()) {
+                    $this->io->write(sprintf("<warning>Cannot authenticate user via netrc credentials. " .
+                        "Unable to fetch user login or password for host </warning><comment>%s</comment>", $host));
+                }
+            }
+        } catch (ParseException $ex) {
+            // we cannot authorize current user via netrc
+            $this->io->write("<warning>Cannot authenticate user via netrc credentials. Is your netrc file valid?</warning>");
         }
     }
 }
