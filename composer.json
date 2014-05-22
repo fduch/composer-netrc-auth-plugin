@@ -17,6 +17,9 @@
         "composer-plugin-api": "1.0.0",
         "fduch/netrc": "<2.0"
     },
+    "require-dev": {
+        "composer/composer": "1.0.x-dev"
+    },
     "extra": {
         "class": "Fduch\\Composer\\Plugin\\NetrcAuthPlugin",
         "branch-alias": {
