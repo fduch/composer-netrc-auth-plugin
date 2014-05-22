@@ -4,6 +4,8 @@ composer-netrc-auth-plugin
 composer-netrc-auth-plugin is a [composer plugin](https://getcomposer.org/doc/articles/plugins.md) that provides netrc-based HTTP authorization during dist's
 downloading process using custom VCS drivers.
 
+[![Build Status](https://travis-ci.org/fduch/composer-netrc-auth-plugin.svg?branch=master)](https://travis-ci.org/fduch/composer-netrc-auth-plugin)
+
 About plugin
 ------------
 
