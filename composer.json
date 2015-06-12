@@ -15,7 +15,7 @@
     "require": {
         "php": ">=5.3.3",
         "composer-plugin-api": "^1.0",
-        "fduch/netrc": "<2.0"
+        "fduch/netrc": "^1.0"
     },
     "require-dev": {
         "composer/composer": "1.0.x-dev"
