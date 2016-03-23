@@ -24,19 +24,13 @@ This plugin extends composer functionality with netrc-based authorization during
 Installation
 ------------
 In order to install plugin on system-wide level use composer global command
-
 ```sh
-php composer.phar global require fduch/composer-netrc-auth-plugin:0.1.0
-```
-
-You can also use current development version of the plugin by requiring 0.1.x-dev:
-
-```sh
-php composer.phar require fduch/composer-netrc-auth-plugin:0.1.x-dev
+php composer.phar global require fduch/composer-netrc-auth-plugin
 ```
 
 Also you can use plugin inside your package locally by requiring it as a regular package:
 ```sh
-php composer.phar require fduch/composer-netrc-auth-plugin:0.1.0
+php composer.phar require fduch/composer-netrc-auth-plugin
 ```
+
 See more about plugin installation in [official documentation](https://getcomposer.org/doc/articles/plugins.md#using-plugins)
